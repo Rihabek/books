@@ -11,5 +11,6 @@
   }
   ?>
 </ul>
+<!-- le code on commence par div contnaires -->
 <?php $content= ob_get_clean(); ?>
 <?php require('public/index.php'); ?>
