@@ -11,8 +11,5 @@
   }
   ?>
 </ul>
-
-<pre><?php var_dump($books); ?></pre>
-
 <?php $content= ob_get_clean(); ?>
 <?php require('public/index.php'); ?>
