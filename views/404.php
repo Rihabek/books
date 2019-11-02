@@ -1,4 +1,4 @@
-<?php $title = 'Page not found'; ?>
+<?php $title = 'bookzel'; ?>
 <?php ob_start(); ?>
 <h1>Page not found</h1>
 <p>Sorry, that page doesn't exist.</p>

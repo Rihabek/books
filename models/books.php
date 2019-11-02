@@ -6,3 +6,4 @@ function getBooks ()
 
   return $books;
 }
+?>
