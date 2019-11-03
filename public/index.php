@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title><?php echo $title ?></title>
   </head>
-  <body>
-    <?php echo $content ?>
-    <!-- le code book library-->
+  <body>  <!-- le code book library-->
   <nav class="navbar navbar-light" style="background-color: black;">
       <a class="navbar-brand" href="#">
-        <img src="public/images/photo.png" width="280" height="130" class="d-inline-block align-top" alt="">
+        <img id="#home" src="public/images/photo.png" width="280" height="130" class="d-inline-block align-top" alt="">
       </a>
 
   <?php echo $content ?>
   </nav>
-
+  <footer class="py-5 bg-dark text-white text-center bottom">
+    <div class="container">
+            Copyright @ Rihabel
+    </div>
+  </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
