@@ -72,6 +72,7 @@
           </div>
           <div class="card-body">
             <h5 class="card-title"><?php echo $book['title']; ?></h5>
+            <span><i class="fas fa-globe"><?php echo $book['country'] ?></i></span>
           </div>
           <div class="card-footer text-muted">
             <a href="<?php echo $book['link']; ?>" class="btn btn-primary">Voir le livre sur wikipedia</a>

@@ -1,0 +1,14 @@
+.books .image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}
+
+.books .image > img {
+  height: 100%;
+  width: 100%;
+}
+
+.books .title {
+  height: 3rem;
