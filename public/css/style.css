@@ -12,3 +12,17 @@
 
 .books .title {
   height: 3rem;
+}
+
+body  {
+  background-color: black;
+}
+
+
+.card .body {
+  display: flex;
+  align-items: flex-start;
+}
+.fa-btc {
+
+}

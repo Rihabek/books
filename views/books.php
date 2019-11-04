@@ -1,22 +1,22 @@
 <?php $title = "bookzel"; ?>
 <?php ob_start(); ?>
+
 <style>
-  .books .image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20rem;
-  }
+.info {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.8rem;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.material-icons{
+  margin-right: 0.9rem;
+}
 
-  .books .image > img {
-    height: 100%;
-    width: 100%;
-  }
-
-  .books .title {
-    height: 3rem;
-  }
 </style>
+
 <div class="container">
   <h1 style="color: white;">Books List</h1>
   <div class="row">
@@ -32,19 +32,26 @@
           <div class="card-body">
             <h5 class="card-title"><?php echo $book['title']; ?></h5>
             <div class="card-body">
-              <i class="fas fa-language"><?php echo $book ['language'];?> </i>
+              <div class="infos">
+                <div class="info">
+                  <i class="material-icons">create</i>
+                  <?php echo $book['author']; ?>
+                </div>
+                <div class="info">
+                  <i class="material-icons">date_range</i>
+                  <?php echo $book["year"] ?>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer text-muted">
             <a href="<?php echo $book['link']; ?>" class="btn btn-danger">Informations</a>
           </div>
+
         </div>
       </div>
     <?php } ?>
   </div>
 </div>
-
-
-
 <?php $content = ob_get_clean(); ?>
 <?php require('public/index.php'); ?>
