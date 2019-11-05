@@ -19,16 +19,21 @@ function getBooks ()
 }
 function getBook($id)
 {
-  $file = file_get_contents('json/books.json');
-  $books = json_decode($file, true);
-    $result =null;
-   foreach ($books as $book) {
-     if ($book['id'] === $id){
-       $result = $book;
-     }
-   }
+  $db = dbConnect();
+  $stmt = $db-> prepare('SELECT
+    books.*,
+    authors.name AS author
+    FROM books
+    LEFT JOIN authors
+    ON books.author_id = authors.id
+    WHERE books.id =:id
+  ');
+  $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 
-   return $result;
-}
+  $stmt ->execute();
+  return $stmt ->fetch();
+
+};
+
 
 ?>

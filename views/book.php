@@ -6,7 +6,7 @@
     <div class="col-4">
       <div class="image">
         <img
-          src="<?php echo $book['images']; ?>"
+          src="<?php echo $book['image']; ?>"
           class="card-img-top"
           alt="Image du livre <?php echo $book['title']; ?>"/>
       </div>
