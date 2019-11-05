@@ -1,9 +1,25 @@
 <?php
 require_once('utils/db.php');
 
+$limit = 20;
+
+function countBooks()
+{
+  $db = dbConnect();
+  $stmt = $db->prepare('SELECT COUNT(*) FROM books');
+  $stmt->execute();
+  return $stmt->fetchColumn();
+
+}
 
 function getBooks ()
 {
+
+  $page = $_GET['page'];
+  $count = countBooks();
+  die($count);
+
+
   $db = dbConnect();
   $stmt = $db-> prepare('SELECT
     books.*,

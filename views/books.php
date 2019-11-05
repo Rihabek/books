@@ -1,5 +1,39 @@
 <?php $title = "bookzel"; ?>
 <?php ob_start(); ?>
++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
 .info {
@@ -38,7 +72,7 @@
         <div class="card books h-100">
           <div class="image">
             <img
-              src="<?php echo $book['image']; ?>"
+              src="<?php echo $book['image']?$book['image']:"public/images/books/imagedefaut.png"; ?>"
               class="card-img-top"
               alt="Image du livre <?php echo $book['title']; ?>"/>
           </div>
