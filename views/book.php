@@ -1,7 +1,7 @@
 <?php $title='Book List' ?>
 <?php ob_start(); ?>
 
-<div class="container display-flex mt-5">
+<div class="container display-flex ">
   <div class="row">
     <div class="col-4">
       <div class="image">
@@ -15,7 +15,7 @@
     <div class="col-8">
 
       <h1 style="color:pink;"><?php echo $book['title'];  ?></h1>
-      <table class="table table-striped table-dark mt-5">
+      <table class="table table-striped table-dark mt-5" style="margin-bottom:5rem;">
       <thead>
         <tr>
           <th scope="col">Author</th>
@@ -32,16 +32,16 @@
           <td><?php echo $book["language"]; ?></td>
         </tr>
         <tr>
-          <th scope="row">Link</th>
-          <td> <a href="<?php echo $book["link"]; ?>" target="_blank">wikipedia</a></td>
+          <th scope="row">Year</th>
+          <td><?php echo $book["year"] ?></td>
         </tr>
         <tr>
           <th scope="row">Pages</th>
           <td><?php echo $book["pages"]; ?></td>
         </tr>
         <tr>
-          <th scope="row">Year</th>
-          <td><?php echo $book["year"] ?></td>
+          <th scope="row">Link</th>
+          <td> <a href="<?php echo $book["link"]; ?>" target="_blank">wikipedia</a></td>
         </tr>
 
     </div>

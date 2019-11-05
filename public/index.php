@@ -12,13 +12,13 @@
   <body>
     <nav class="navbar navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
-        <i class="fa fa-btc" style="margin-right: 0.9rem; font-size: 3em; margin-top:0.9;"></i> BookZel
-        <p style="margin-left:4rem; color:pink;">Paper's Of Wisdom</p>
+        <i class="fa fa-btc" style="margin-right: 0.9rem; font-size: 3em; margin-top:0.9;"></i> <p>BookZel</p>
+        <p style="margin-left:4rem; color:#C82333;">Paper's Of Wisdom</p>
 
       </a>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i class="fa fa-eye"></i> </span>Search</button>
+        <form action="search.php" method="GET" class="form-inline my-2 my-lg-0">
+          <input name="query" class="form-control mr-sm-2" type="text"  value="search" placeholder="Search" aria-label="Search">
+          <button value="Search" class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i class="fa fa-eye"></i> </span>Search</button>
         </form>
     </nav>
     <?php echo $content ?>
