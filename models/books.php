@@ -1,7 +1,6 @@
 <?php
 require_once('utils/db.php');
 
-$limit = 20;
 
 function countBooks()
 {
@@ -15,9 +14,12 @@ function countBooks()
 function getBooks ()
 {
 
-  $page = $_GET['page'];
+  $limit = 20;
+  $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
   $count = countBooks();
-  die($count);
+  $offset = ($page - 1) * $limit;
+  var_dump($offset);
+  die($offset);
 
 
   $db = dbConnect();
@@ -42,7 +44,7 @@ function getBook($id)
     FROM books
     LEFT JOIN authors
     ON books.author_id = authors.id
-    WHERE books.id =:id
+    LIMIT 0, 20
   ');
   $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 

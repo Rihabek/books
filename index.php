@@ -16,3 +16,4 @@ switch ($action) {
   default:
     require('views/404.php');
 }
+?>
