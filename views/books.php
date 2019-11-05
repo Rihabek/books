@@ -38,7 +38,7 @@
         <div class="card books h-100">
           <div class="image">
             <img
-              src="public/<?php echo $book['imageLink']; ?>"
+              src="<?php echo $book['image']; ?>"
               class="card-img-top"
               alt="Image du livre <?php echo $book['title']; ?>"/>
           </div>
