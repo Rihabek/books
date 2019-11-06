@@ -13,12 +13,12 @@ function countBooks()
 
 function getBooks ()
 {
-
+  $page = isset($_GET['page']);
   $limit = 20;
   $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
   $count = countBooks();
   $offset = ($page - 1) * $limit;
-  
+
 
 
   $db = dbConnect();
@@ -28,10 +28,10 @@ function getBooks ()
     FROM books
     LEFT JOIN authors
     ON books.author_id = authors.id
-    LIMIT:offset, limit
+    LIMIT :offset, :limit
   ');
-  $stmt->bindParam('offset',$offset);
-  $stmt->bindParam(':limit',$limit);
+  $stmt->bindParam(':offset',$offset, PDO:: PARAM_INT);
+  $stmt->bindParam(':limit',$limit, PDO:: PARAM_INT);
 
 
   $stmt->execute();
