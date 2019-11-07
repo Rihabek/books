@@ -1,5 +1,15 @@
 
 <?php
+
+require('../utils/db.php');
+
+
+  $db = dbConnect();
+  $stmt = $db->prepare('SELECT * FROM authors');
+  $stmt->execute();
+  $a_id = $stmt ->fetchAll()
+
+
  ?>
 
  <!DOCTYPE html>
@@ -15,15 +25,27 @@
          <div class="row">
            <div class="col-md-6">
              <div class="form-group">
-              <label for="title">Titre</label>
-              <input maxlength="30" type="email" class="form-control" id="title" placeholder="Book's title">
+              <label for="title">Book title</label>
+              <input name="title" maxlength="30" type="email" class="form-control" id="title" placeholder="Book's title">
               <small id="titlehelp" class="form-text text-muted">Books title between 0 and 255.</small>
              </div>
              <div class="form-group">
-               <label for="exampleFormControlTextarea1">Example textarea</label>
-               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+               <label for="description">Description</label>
+               <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
              </div>
-             </div>
+             <div class="form-group">
+                <label for="author">Authors</label>
+                <select name='author_id' class="form-control" id="author_id">
+                  <?php foreach ($a_id as $author ) {?>
+
+                  <option value="<?php echo $author['id']; ?>">
+                    <?php echo $author['name']; ?>
+                  </option>
+                <?php } ?>
+
+                </select>
+              </div>
+            </div>
            <div class="col-6">
              <!-- col 6 -->
            </div>
