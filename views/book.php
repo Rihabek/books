@@ -14,12 +14,12 @@
   </div>
     <div class="col-8">
 
-      <h1 style="color:pink;"><?php echo $book['title'];  ?></h1>
+      <h1 style="color:#DC3545;"><?php echo $book['title'];  ?></h1>
       <table class="table table-striped table-dark mt-5" style="margin-bottom:5rem;">
       <thead>
         <tr>
           <th scope="col">Author</th>
-          <td scope="col"><?php echo $book["author"]; ?></td>
+          <td scope="col"><?php echo $book["author"];?></td>
         </tr>
       </thead>
       <tbody>

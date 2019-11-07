@@ -1,0 +1,4 @@
+AuthName "Admin"
+AuthType Basic
+AuthUserFile "/home/rhiab/Documents/project/php/books/admin/.htpasswd"
+Require valid-user
