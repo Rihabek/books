@@ -3,8 +3,16 @@
 
 require('../utils/db.php');
 
+$db = dbConnect();
+$id = isset($_GET['id'])? (int)$_GET['id']: null;
 
-  $db = dbConnect();
+if ($id){
+  // recupere les données d'un livre
+  $stmt = $db->prepare('SELECT * FROM books WHERE id = :id');
+  $stmt-> bindparam(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $book = $stmt-> fetch();
+}
   $stmt = $db->prepare('SELECT * FROM authors ORDER BY `name`');
   $stmt->execute();
   $a_id = $stmt ->fetchAll();
@@ -63,7 +71,6 @@ require('../utils/db.php');
 
     $id = $db->lastInsertId();
 
-    var_dump($id);
   }
 
  ?>
@@ -78,31 +85,37 @@ require('../utils/db.php');
    <body>
     <div class="container">
       <h1 class="mb-3 mt-3">Add a book </h1>
-       <form action="./" method="post">
+       <form name="myForm" action="./" method="post">
         <div class="row">
           <div class="col-md-6">
              <div class="form-group">
               <label for="title">Book title</label>
-              <input name="title" maxlength="30" type="text" class="form-control" id="title" placeholder="Book's title">
+              <input  value="<?php echo isset($book) ? $book['title'] :''; ?>" name="title" maxlength="30" type="text" class="form-control" id="title" placeholder="Book's title">
               <small id="titlehelp" class="form-text text-muted">Books title between 0 and 255.</small>
              </div>
              <div class="form-group">
               <label for="description">Description</label>
-              <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+              <textarea  value="<?php echo isset($book) ? $book['description'] :''; ?>"  name="description" class="form-control" id="description" rows="3"></textarea>
              </div>
              <div class="form-group">
                 <label for="author_id">Authors</label>
                 <select name="author_id" class="form-control" id="author_id">
                   <?php foreach ($a_id as $author ) {?>
-                    <option value="<?php echo $author['id']; ?>">
-                      <?php echo $author['name']; ?>
-                    </option>
-                  <?php } ?>
+                    <?php if (isset($book) && $book['author_id'] == $author['id']){ ?>
+                      <option selected='select' value="<?php echo $author['id']; ?>">
+                        <?php echo $author['name']; ?>
+                      </option>
+                    <?php } else {?>
+                      <option <?php echo (isset($book) && $book['author_id'] === $author['id']) ? 'selected' : ''; ?> value="<?php echo $author['id']; ?>">
+                        <?php echo $author['name']; ?>
+                      </option>
+                    <?php } ?>
                 </select>
               </div>
               <div class="form-group">
                <label for="pages">Pages number</label>
-               <input name="pages"
+               <input>   <!--  mettre ca dans tout les champs  -->
+                 name="pages"
                  type="number"
                  class="form-control"
                  step='1'
@@ -143,10 +156,12 @@ require('../utils/db.php');
         </div>
         <div class="row">
           <div class="col-md-12">
-            <button name="book" type="submit" class="btn btn-lg bg-danger">Submit</button>
+            <button  type="submit" name="submit" value="submit" class="btn btn-lg bg-danger">Submit</button>
           </div>
         </div>
       </form>
     </div>
    </body>
+
+   <script src="formValidation.js" type="text/javascript"></script>
  </html>
