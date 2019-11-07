@@ -5,7 +5,7 @@ require('../utils/db.php');
 
 
   $db = dbConnect();
-  $stmt = $db->prepare('SELECT * FROM authors');
+  $stmt = $db->prepare('SELECT * FROM authors ORDER BY `name`');
   $stmt->execute();
   $a_id = $stmt ->fetchAll()
 
