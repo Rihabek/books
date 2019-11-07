@@ -7,8 +7,64 @@ require('../utils/db.php');
   $db = dbConnect();
   $stmt = $db->prepare('SELECT * FROM authors ORDER BY `name`');
   $stmt->execute();
-  $a_id = $stmt ->fetchAll()
+  $a_id = $stmt ->fetchAll();
 
+  if (isset($_POST['book'])){
+    $title = (string) $_POST['title'];
+    $description = (string) $_POST['description'];
+    $authorId = (string) $_POST['author_id'];
+    $pages = (int) $_POST['pages'];
+    $wikipediaLink = (string) $_POST['wikipedia_link'];
+    $publishedYear = (int) $_POST['published_year'];
+    $language = (string) $_POST['language'];
+    $country = (string) $_POST['country'];
+
+
+    if (strlen($title) > 255) {
+      $title = substr($title, 0, 255);
+    }
+
+    if (!preg_match('/^(http|https):\/\/([a-z]{2})\.wikipedia\.org\/([a-zA-Z0-9-_\/%:]+)?/i', $wikipediaLink)){
+
+      $wikipediaLink ='';
+    }
+    $stmt = $db->prepare('INSERT INTO
+      `books` (
+      `title`,
+      `description`,
+      `author_id`,
+      `pages`,
+      `wikipedia_link`,
+      `year`,
+      `language`,
+      `country`
+    )
+    VALUES (
+      :title,
+      :description,
+      :author_id,
+      :pages,
+      :wikipedia_link,
+      :year,
+      :language,
+      :country
+    )');
+
+    $stmt-> bindparam(':title', $title, PDO::PARAM_STR);
+    $stmt-> bindparam(':description', $description, PDO::PARAM_STR);
+    $stmt-> bindparam(':author_id', $authorId, PDO::PARAM_INT);
+    $stmt-> bindparam(':pages', $pages, PDO::PARAM_INT);
+    $stmt-> bindparam(':wikipedia_link', $wikipediaLink, PDO::PARAM_STR);
+    $stmt-> bindparam(':year', $publishedYear, PDO::PARAM_INT);
+    $stmt-> bindparam(':language', $language, PDO::PARAM_STR);
+    $stmt-> bindparam(':country', $country, PDO::PARAM_STR);
+
+    $stmt->execute();
+
+    $id = $db->lastInsertId();
+
+    var_dump($id);
+  }
 
  ?>
 
@@ -21,12 +77,13 @@ require('../utils/db.php');
    </head>
    <body>
     <div class="container">
-       <form class="./" action="index.html" method="post">
+      <h1 class="mb-3 mt-3">Add a book </h1>
+       <form action="./" method="post">
         <div class="row">
           <div class="col-md-6">
              <div class="form-group">
               <label for="title">Book title</label>
-              <input name="title" maxlength="30" type="email" class="form-control" id="title" placeholder="Book's title">
+              <input name="title" maxlength="30" type="text" class="form-control" id="title" placeholder="Book's title">
               <small id="titlehelp" class="form-text text-muted">Books title between 0 and 255.</small>
              </div>
              <div class="form-group">
@@ -55,11 +112,11 @@ require('../utils/db.php');
             </div>
           <div class="col-md-6">
              <div class="form-group">
-              <label for="wikipidia_link">wikipidia's Link</label>
-              <input name="year"
-                type="number"
+              <label for="wikipedia_link">wikipedia's Link</label>
+              <input name="wikipedia_link"
+                type="text"
                 class="form-control"
-                id="wikipidia_link">
+                id="wikipedia_link">
              </div>
              <div class="form-group">
               <label for="language">Language</label>
@@ -70,7 +127,7 @@ require('../utils/db.php');
              </div>
              <div class="form-group">
               <label for="published_year">Published year</label>
-              <input name="pub_year"
+              <input name="published_year"
                 type="number"
                 class="form-control"
                 id="published_year">
@@ -86,7 +143,7 @@ require('../utils/db.php');
         </div>
         <div class="row">
           <div class="col-md-12">
-            <button type="button" class="btn btn-lg bg-danger">Submit</button>
+            <button name="book" type="submit" class="btn btn-lg bg-danger">Submit</button>
           </div>
         </div>
       </form>
