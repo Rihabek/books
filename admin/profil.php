@@ -1,8 +1,12 @@
 <?php
-session_start ();
-  if (!isset($_SESSION['id'])) {
-    header('Location: ./');
-  }
+
+// includ('is-log.php');  pour se connecter 
+
+
+  session_start ();
+    if (!isset($_SESSION['id'])) {
+      header('Location: ./');
+    }
 
 ?>
 <!DOCTYPE html>
