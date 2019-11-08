@@ -3,7 +3,7 @@
 
   $db = new PDO('mysql:host=localhost;dbname=books', 'root');
 
-  if (isset($_SESSION['id'])) {
+  if (isset($_SESSION['id'])) { // si on se connecte session destroy
     session_destroy();
   }
 
