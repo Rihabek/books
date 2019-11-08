@@ -6,18 +6,14 @@ require('../utils/db.php');
 $db = dbConnect();
 $id = isset($_GET['id'])? (int)$_GET['id']: null;
 
-if ($id){
-  // recupere les données d'un livre
-  $stmt = $db->prepare('SELECT * FROM books WHERE id = :id');
-  $stmt-> bindparam(':id', $id, PDO::PARAM_INT);
-  $stmt->execute();
-  $book = $stmt-> fetch();
-}
+
   $stmt = $db->prepare('SELECT * FROM authors ORDER BY `name`');
   $stmt->execute();
-  $a_id = $stmt ->fetchAll();
+  $a_id =
+  $stmt ->fetchAll();
 
   if (isset($_POST['book'])){
+    $id = isset($_POST['id'])? (int) $_POST['id']:null ;
     $title = (string) $_POST['title'];
     $description = (string) $_POST['description'];
     $authorId = (string) $_POST['author_id'];
@@ -28,6 +24,11 @@ if ($id){
     $country = (string) $_POST['country'];
 
 
+    if (!$title) {
+      throw new Exception('Invalid title');
+
+    }
+
     if (strlen($title) > 255) {
       $title = substr($title, 0, 255);
     }
@@ -36,7 +37,25 @@ if ($id){
 
       $wikipediaLink ='';
     }
-    $stmt = $db->prepare('INSERT INTO
+    if ($id) {
+
+      $stmt = $db-> prepare('UPDATE  books
+        SET
+      title = :title,
+      description = :description,
+      author_id = :author_id,
+      pages = :pages,
+      wikipedia_link = :wikipedia_link,
+      year = :year,
+      language = :language,
+      country = :country
+      WHERE id = :id
+      ');
+      $stmt-> bindParam(':id', $id, PDO::PARAM_INT);
+
+    } else {
+
+      $stmt = $db->prepare('INSERT INTO
       `books` (
       `title`,
       `description`,
@@ -46,33 +65,44 @@ if ($id){
       `year`,
       `language`,
       `country`
-    )
-    VALUES (
-      :title,
-      :description,
-      :author_id,
-      :pages,
-      :wikipedia_link,
-      :year,
-      :language,
-      :country
-    )');
+      )
+      VALUES (
+        :title,
+        :description,
+        :author_id,
+        :pages,
+        :wikipedia_link,
+        :year,
+        :language,
+        :country
 
-    $stmt-> bindparam(':title', $title, PDO::PARAM_STR);
-    $stmt-> bindparam(':description', $description, PDO::PARAM_STR);
-    $stmt-> bindparam(':author_id', $authorId, PDO::PARAM_INT);
-    $stmt-> bindparam(':pages', $pages, PDO::PARAM_INT);
-    $stmt-> bindparam(':wikipedia_link', $wikipediaLink, PDO::PARAM_STR);
-    $stmt-> bindparam(':year', $publishedYear, PDO::PARAM_INT);
-    $stmt-> bindparam(':language', $language, PDO::PARAM_STR);
-    $stmt-> bindparam(':country', $country, PDO::PARAM_STR);
+      )');
+    }
+    $stmt-> bindParam(':title', $title, PDO::PARAM_STR);
+    $stmt-> bindParam(':description', $description, PDO::PARAM_STR);
+    $stmt-> bindParam(':author_id', $authorId, PDO::PARAM_INT);
+    $stmt-> bindParam(':pages', $pages, PDO::PARAM_INT);
+    $stmt-> bindParam(':wikipedia_link', $wikipediaLink, PDO::PARAM_STR);
+    $stmt-> bindParam(':year', $publishedYear, PDO::PARAM_INT);
+    $stmt-> bindParam(':language', $language, PDO::PARAM_STR);
+    $stmt-> bindParam(':country', $country, PDO::PARAM_STR);
 
     $stmt->execute();
 
-    $id = $db->lastInsertId();
+    if (!$id) {
+      $id = $db->lastInsertId();
+       header('Location:' . $_SERVER["REQUEST_URI"] .'?id=' .$id );
+    }
 
   }
 
+  if ($id){
+    // recupere les données d'un livre
+    $stmt = $db->prepare('SELECT * FROM books WHERE id = :id');
+    $stmt-> bindparam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    $book = $stmt-> fetch();
+  }
  ?>
 
  <!DOCTYPE html>
@@ -84,13 +114,13 @@ if ($id){
    </head>
    <body>
     <div class="container">
-      <h1 class="mb-3 mt-3">Add a book </h1>
-       <form name="myForm" action="./" method="post">
+      <h1 class="mb-3 mt-3"><?php echo !isset($book)? "Add a book" : "Edit :" .$book['title']; ?> </h1>
+       <form name="myForm" action="./<?php echo isset($book)? '?id=' .$book['id']:''; ?>" method="post">
         <div class="row">
           <div class="col-md-6">
              <div class="form-group">
               <label for="title">Book title</label>
-              <input  value="<?php echo isset($book) ? $book['title'] :''; ?>" name="title" maxlength="30" type="text" class="form-control" id="title" placeholder="Book's title">
+              <input required value="<?php echo isset($book) ? $book['title'] :''; ?>" name="title" maxlength="30" type="text" class="form-control" id="title" placeholder="Book's title">
               <small id="titlehelp" class="form-text text-muted">Books title between 0 and 255.</small>
              </div>
              <div class="form-group">
@@ -159,7 +189,8 @@ if ($id){
         </div>
         <div class="row">
           <div class="col-md-12">
-            <button  type="submit" name="submit" value="submit" class="btn btn-lg bg-danger">Submit</button>
+            <input type="hidden" name="id" value="<?php echo isset($book)? $book['id']:''; ?>">
+            <button  type="submit" name="book" value="submit" class="btn btn-lg bg-danger">Submit</button>
           </div>
         </div>
       </form>
