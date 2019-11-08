@@ -13,22 +13,17 @@
     <nav class="navbar navbar-dark " style="color:black;">
       <div style="display:flex;"class="display-flex">
         <a class="navbar-brand" href="#">
-
           <div class="container text-center">
             <p style="font-size:2rem;"><i class="fa fa-btc" style="margin-right: 0.8rem; font-size: 2em; margin-top:0.9;"></i>ookZel</p>
             <p class="subtitle">Paper's Of Wisdom</p>
           </div>
-
         </a>
-
       </div>
         <form action="search.php" method="GET" class="form-inline my-2 my-lg-0">
           <input name="query" class="form-control mr-sm-2" type="text"  value="search" placeholder="Search" aria-label="Search">
           <button value="Search" class="btn btn-outline-danger my-2 my-sm-0" type="submit"><i class="fa fa-eye"></i> </span>Search</button>
         </form>
     </nav>
-    
-
     <?php echo $content ?>
 <!--
     <footer class="py-5 bg-dark text-white text-center bottom">

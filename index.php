@@ -17,4 +17,3 @@ switch ($action) {
     require('views/404.php');
 }
 ?>
-<?php echo crypt('$1$k7SLTYbt$VowdD0QKH/.qatY7QAgNj0'); ?>
