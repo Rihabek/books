@@ -1,7 +1,6 @@
 <?php
 
-// includ('is-log.php');  pour se connecter 
-
+// includ('is-log.php');  pour se connecter
 
   session_start ();
     if (!isset($_SESSION['id'])) {
