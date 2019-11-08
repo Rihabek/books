@@ -102,52 +102,55 @@ if ($id){
                 <select name="author_id" class="form-control" id="author_id">
                   <?php foreach ($a_id as $author ) {?>
                     <?php if (isset($book) && $book['author_id'] == $author['id']){ ?>
-                      <option selected='select' value="<?php echo $author['id']; ?>">
+                      <option selected='selected' value="<?php echo $author['id']; ?>">
                         <?php echo $author['name']; ?>
                       </option>
                     <?php } else {?>
-                      <option <?php echo (isset($book) && $book['author_id'] === $author['id']) ? 'selected' : ''; ?> value="<?php echo $author['id']; ?>">
+                      <option  value="<?php echo $author['id']; ?>">
                         <?php echo $author['name']; ?>
                       </option>
                     <?php } ?>
+                  <?php } ?>
                 </select>
               </div>
               <div class="form-group">
                <label for="pages">Pages number</label>
-               <input>   <!--  mettre ca dans tout les champs  -->
-                 name="pages"
-                 type="number"
-                 class="form-control"
-                 step='1'
-                 min='0'
-                 id="pages">
+               <input name="pages" value="<?php echo isset($book) ? $book['pages'] :''; ?>" type="number" class="form-control"step="1" min="0" id="pages">
               </div>
             </div>
           <div class="col-md-6">
              <div class="form-group">
               <label for="wikipedia_link">wikipedia's Link</label>
-              <input name="wikipedia_link"
+              <input
+                name="wikipedia_link"
+                value="<?php echo isset($book) ? $book['wikipedia_link'] :''; ?>"
                 type="text"
                 class="form-control"
                 id="wikipedia_link">
              </div>
              <div class="form-group">
               <label for="language">Language</label>
-              <input name="language"
+              <input
+                name="language"
+                value="<?php echo isset($book) ? $book['language'] :''; ?>"
                 type="text"
                 class="form-control"
                 id="language">
              </div>
              <div class="form-group">
               <label for="published_year">Published year</label>
-              <input name="published_year"
+              <input
+                name="published_year"
+                value="<?php echo isset($book) ? $book['year'] :''; ?>"
                 type="number"
                 class="form-control"
-                id="published_year">
+                id="year">
              </div>
              <div class="form-group">
               <label for="country">Country</label>
-              <input name="country"
+              <input
+                name="country"
+                value="<?php echo isset($book) ? $book['country'] :''; ?>"
                 type="text"
                 class="form-control"
                 id="country">
@@ -162,6 +165,4 @@ if ($id){
       </form>
     </div>
    </body>
-
-   <script src="formValidation.js" type="text/javascript"></script>
  </html>
