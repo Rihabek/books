@@ -4,7 +4,7 @@ require('models/authors.php');
 require('models/books.php');
 require('models/countries.php');
 require('models/languages.php');
-
+require('models/categories.php');
 $breadcrumb = array(array(
   'name' => "Livres",
   'link' => './'
@@ -47,7 +47,7 @@ function editBook (int $id): void
   $authors = getAuthors();
   $countries = getCountries();
   $languages = getLanguages();
-
+  $categories = getCategories();
   $breadcrumb[] = array(
     'active' => true,
     'name' => "Editer un livre : " . $book['title'],

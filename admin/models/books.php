@@ -136,6 +136,7 @@ function setBook(int $id, array $data): int
       ' . (isset($data['author_id']) ? ', author_id = :author_id' : null) . '
       ' . (isset($data['country_id']) ? ', country_id = :country_id' : null) . '
       ' . (isset($data['language_id']) ? ', language_id = :language_id' : null) . '
+      ' . (isset($data['categories_id']) ? ', categories_id = :categories_id' : null) . '
       WHERE id = :id
     ');
 
@@ -173,6 +174,10 @@ function setBook(int $id, array $data): int
 
     if (isset($data['wikipedia_link'])) {
       $stmt->bindParam(':wikipedia_link', $data['wikipedia_link'], PDO::PARAM_STR);
+    }
+
+    if (isset($data['categories_id'])) {
+      $stmt->bindParam(':categories_id', $data['categories_id'], PDO::PARAM_INT);
     }
 
     return $stmt->execute();

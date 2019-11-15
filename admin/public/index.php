@@ -55,6 +55,15 @@
               <a class="dropdown-item" href="?path=languages&action=add">Ajouter une langue</a>
             </div>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="?path=categories" id="categoriesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="categoriesDropdown">
+              <a class="dropdown-item" href="?path=categories">List des catégories</a>
+              <a class="dropdown-item" href="?path=categories&action=add">Ajouter une catégorie</a>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>

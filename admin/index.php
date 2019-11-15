@@ -1,4 +1,6 @@
 <?php
+
+
 if (!isset($_GET['path']) || !$_GET['path']) {
   require('controllers/books.php');
   if (!isset($_GET['action']) || !$_GET['action']) {
@@ -44,6 +46,21 @@ if (!isset($_GET['path']) || !$_GET['path']) {
         unactiveCountry((int) $_GET['id']);
       } else {
         header('Location: ./?path=countries');
+      }
+      break;
+
+    case 'categories':
+      require('controllers/categories.php');
+      if (!isset($_GET['action']) || !$_GET['action']) {
+        categories();
+      } else if ($_GET['action'] === 'add') {
+        newCategory();
+      }else if ($_GET['action'] === 'edit' && isset($_GET['id'])) {
+        editCategory((int) $_GET['id']);
+      } else if ($_GET['action'] === 'hide' && isset($_GET['id'])) {
+        unactiveCategory((int) $_GET['id']);
+      } else {
+        header('Location: ./?path=categories');
       }
       break;
 
