@@ -21,7 +21,7 @@
         <div class="row">
           <div class="col-md-12">
             <input type="hidden" name="id" value="<?php echo isset($category['id']) ? $category['id'] : ''; ?>">
-            <button name="language" type="submit" class="btn btn-primary">Valider</button>
+            <button name="category" type="submit" class="btn btn-primary">Valider</button>
           </div>
         </div>
       </form>
